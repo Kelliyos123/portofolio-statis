@@ -1,5 +1,5 @@
 [build]
-publish = "Fortofolio/portofolio statis" # Ganti dengan direktori tempat file HTML kamu.
+publish = "portofolio statis" # Ganti dengan direktori tempat file HTML kamu.
 functions = "functions" # Pastikan ini menunjuk ke folder functions.
 
 [functions]
