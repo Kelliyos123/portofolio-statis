@@ -1,0 +1,326 @@
+/*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+    /*=============== VARIABLES CSS ===============*/
+:root {
+        --header-height: 3.5rem;
+    
+        /*========== Colors ==========*/
+        /*Color mode HSL(hue, saturation, lightness)*/
+        /*
+            Purple: hsl(250, 66%, 75%)
+            Blue: hsl(207, 90%, 72%)
+            Pink: hsl(356, 66%, 75%)
+            Teal: hsl(174, 63%, 62%)
+            66 , 70 , 62
+        */
+        --first-hue: 207;
+        --sat: 66%;
+        --lig: 75%;
+        --second-hue: 219;
+        --first-color: hsl(var(--first-hue), var(--sat), var(--lig));
+        --first-color-alt: hsl(var(--first-hue), var(--sat), 68%); /* -4% */
+        --title-color: hsl(var(--second-hue), 15%, 95%);
+        --text-color: hsl(var(--second-hue), 8%, 75%);
+        --text-color-light: hsl(var(--second-hue), 4%, 55%);
+        --body-color: hsl(var(--second-hue), 48%, 8%);
+        --container-color: hsl(var(--second-hue), 32%, 12%);
+    
+        /*========== Font and typography ==========*/
+        /*.5rem = 8px | 1rem = 16px ...*/
+        --body-font: 'Poppins', sans-serif;
+        --biggest-font-size: 1.75rem;
+        --h1-font-size: 1.5rem;
+        --h2-font-size: 1.25rem;
+        --h3-font-size: 1rem;
+        --normal-font-size: .938rem;
+        --small-font-size: .813rem;
+        --smaller-font-size: .75rem;
+        --tiny-font-size: .625rem;
+    
+        /*========== Font weight ==========*/
+        --font-medium: 500;
+        --font-semibold: 600;
+    
+        /*========== z index ==========*/
+        --z-tooltip: 10;
+        --z-fixed: 100;
+        --z-modal: 1000;
+    }
+
+    /* Responsive typography */
+    @media screen and (min-width: 968px) {
+        :root {
+        --biggest-font-size: 2.5rem;
+        --h1-font-size: 2.25rem;
+        --h2-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: .875rem;
+        --smaller-font-size: .813rem;
+        }
+    }
+    
+/*=============== BASE ===============*/
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    body,
+    button,
+    input,
+    textarea {
+        font-family: var(--body-font);
+        font-size: var(--normal-font-size);
+    }
+    
+    body {
+        background-color: var(--body-color);
+        color: var(--text-color);
+        transition: .4s; /* for light mode animation */
+    }
+    
+    h1, h2, h3 {
+        color: var(--title-color);
+        font-weight: var(--font-semibold);
+    }
+    
+    ul {
+        list-style: none;
+    }
+    
+    a {
+        text-decoration: none;
+    }
+    
+    button {
+        cursor: pointer;
+        border: none;
+        outline: none;
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+/*============== REUSABLE CSS CLASSES ===============*/
+    .container {
+        max-width: 100%;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
+    .grid {
+        display: grid;
+        gap: 1.25rem;
+    }
+    
+    .main {
+        overflow: hidden;
+    }
+    
+    .section {
+        padding: 4.5rem 0 1rem;
+    }
+    
+    .section__title, 
+    .section__subtitle {
+        text-align: center;
+    }
+    
+    .section__title {
+        font-size: var(--h2-font-size);
+        color: var(--first-color);
+        margin-bottom: 2rem;
+    }
+    
+    .section__subtitle {
+        display: block;
+        font-size: var(--smaller-font-size);
+        color: var(--text-color-light);
+    }
+    
+/* button listrik */
+
+    .button {
+        position: absolute;
+    }
+    
+    .button button {
+        color: white;
+        padding: 1rem 3rem 1rem 3rem;
+        border-radius: 8px;
+        font-size: 1.25rem;
+        line-height: 1rem;
+        background: linear-gradient(115deg,#4fcf70,#fad648,#a767e5,#12bcfe,#44ce7b);
+    }
+
+    .codepen-button:hover::before {
+    animation-play-state: running;
+    transition-duration: 0.75s;
+    translate: 0% 0%;
+    }
+    
+    .button button:hover {
+        cursor: pointer;
+        background: #0F1C53;
+    }
+    
+    .button button:hover + svg, .button button:hover + svg + .dots {
+        opacity: 1;
+    }
+    
+    .button svg {
+        display: block;
+        position: absolute;
+        top: -0.75em;
+        left: -0.25em;
+        width: calc(100% + 0.5em);
+        height: calc(100% + 1.5em);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.4s;
+        transition-delay: 0.1s;
+    }
+    
+    .button svg path {
+        stroke-dasharray: 100;
+        filter: url("#glow");
+    }
+    
+    .button svg path.line-1 {
+        stroke: #f6de8d;
+        stroke-dashoffset: 0;
+        animation: spark-1 3s linear infinite;
+    }
+    
+    .button svg path.line-2 {
+        stroke: #6bfeff;
+        stroke-dashoffset: 500;
+        animation: spark-2 3s linear infinite;
+    }
+    
+    .button .dots {
+        opacity: 0;
+        transition: opacity 0.3s;
+        transition-delay: 0.4s;
+    }
+    
+    .button .dots .dot {
+        width: 1rem;
+        height: 1rem;
+        background: white;
+        border-radius: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+    
+    .button .dots .dot-1 {
+        top: 0;
+        left: 20%;
+        animation: fly-up 3s linear infinite;
+    }
+    
+    .button .dots .dot-2 {
+        top: 0;
+        left: 55%;
+        animation: fly-up 3s linear infinite;
+        animation-delay: 0.5s;
+    }
+    
+    .button .dots .dot-3 {
+        top: 0;
+        left: 80%;
+        animation: fly-up 3s linear infinite;
+        animation-delay: 1s;
+    }
+    
+    .button .dots .dot-4 {
+        bottom: 0;
+        left: 30%;
+        animation: fly-down 3s linear infinite;
+        animation-delay: 2.5s;
+    }
+    
+    .button .dots .dot-5 {
+        bottom: 0;
+        left: 65%;
+        animation: fly-down 3s linear infinite;
+        animation-delay: 1.5s;
+    }
+    
+    @keyframes spark-1 {
+        to {
+        stroke-dashoffset: -1000;
+        }
+    }
+    
+    @keyframes spark-2 {
+        to {
+        stroke-dashoffset: -500;
+        }
+    }
+    
+    @keyframes fly-up {
+        0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+        }
+    
+        5% {
+        opacity: 1;
+        transform: translateY(-1.5rem) scale(0.4);
+        }
+    
+        10%, 100% {
+        opacity: 0;
+        transform: translateY(-3rem) scale(0.2);
+        }
+    }
+    
+    @keyframes fly-down {
+        0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+        }
+    
+        5% {
+        opacity: 1;
+        transform: translateY(1.5rem) scale(0.4);
+        }
+    
+        10%, 100% {
+        opacity: 0;
+        transform: translateY(3rem) scale(0.2);
+        }
+    }
+
+    /* pembukaan  */
+    .pembukaan__container{
+    position: relative;
+    padding: 8rem 5rem 8rem 5rem;
+    align-items: center;
+    justify-content: center;
+    margin: 4rem 10rem 4rem 10rem;
+
+    }
+
+    .img__logoku{
+        width: 30%;
+        align-items: center;
+        justify-content: center;
+        padding-top: 4rem;
+    }
+    
+    .n_1{
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+    }
