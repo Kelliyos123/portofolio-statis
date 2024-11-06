@@ -17,10 +17,10 @@
 
         219 seccond hue
   */
-  --first-hue: 277;
-  --sat:72%;
-  --lig: 76%;
-  --second-hue: 300;
+  --first-hue: 174;
+  --sat:63%;
+  --lig: 62%;
+  --second-hue: 219;
   --first-color: hsl(var(--first-hue), var(--sat), var(--lig));
   --first-color-alt: hsl(var(--first-hue), var(--sat), 68%); /* -4% */
   --title-color: hsl(var(--second-hue), 15%, 95%);
